@@ -6,6 +6,8 @@ class Solution:
             if diff in a:
                 return [a[diff],i]
             a[nums[i]] = i
+        print(a)
+
 
 
 
