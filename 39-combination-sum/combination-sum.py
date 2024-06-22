@@ -1,8 +1,7 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         arr = []
-        ans =[]
-        ind = 0
+        ans = []
 
         def backtracking(ind,target):
             if ind == len(candidates):
