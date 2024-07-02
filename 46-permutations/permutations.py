@@ -1,32 +1,32 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        ans =[]
-        ind = 0
-        def perm(ind):
+        arr = []
+        ans = []
+
+        def back(ind):
             if ind == len(nums):
                 ans.append(nums[:])
-                return
+                return 
             for i in range(ind,len(nums)):
-                nums[ind],nums[i] = nums[i], nums[ind]
-                perm(ind+1)
-                nums[ind],nums[i] = nums[i], nums[ind]
-        perm(0)
+                nums[i],nums[ind] = nums[ind],nums[i]
+                back(ind+1)
+                nums[i],nums[ind] = nums[ind],nums[i]
+        back(0)
         return ans
-
         # maps = [0] * len(nums)
+        # arr =[]
         # ans = []
-        # arr = []
 
-        # def perm(arr,maps):
+        # def back(arr,maps):
         #     if len(arr) == len(nums):
         #         ans.append(arr[:])
-        #         return 
+        #         return
         #     for i in range(len(nums)):
-        #         if (maps[i] == False):
-        #             arr.append(nums[i])
+        #         if (maps[i]==False):
         #             maps[i] = True
-        #             perm(arr,maps)
-        #             arr.remove(nums[i])
+        #             arr.append(nums[i])
+        #             back(arr,maps)
         #             maps[i] = False
-        # perm(arr,maps)
+        #             arr.pop()
+        # back(arr,maps)
         # return ans
