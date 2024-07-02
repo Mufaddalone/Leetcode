@@ -3,17 +3,18 @@ class Solution:
         arr = []
         ans = []
         candidate.sort()
-        def backtracking(ind, target):
-            if target == 0:
+        def back(ind,target):
+            if target ==0:
                 ans.append(arr[:])
-                return
+                return 
             for i in range(ind,len(candidate)):
-                if i > ind and candidate[i] == candidate[i-1]: continue
-                if candidate[i] > target : break
+                if i!=ind and candidate[i] == candidate[i-1]:continue
+                if candidate[i]>target: break
                 arr.append(candidate[i])
-                backtracking(i+1, target-candidate[i])
-                arr.remove(candidate[i])
-        backtracking(0,target)
+                back(i+1,target-candidate[i])
+                arr.pop()
+        back(0,target)
         return ans
+
         
 
