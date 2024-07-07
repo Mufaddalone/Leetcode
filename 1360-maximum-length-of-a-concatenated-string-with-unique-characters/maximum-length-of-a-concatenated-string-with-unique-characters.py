@@ -1,27 +1,23 @@
 class Solution:
     def maxLength(self, arr: List[str]) -> int:
-        charSet = set()
-
-        def overlap(charSet, s):
-            c = Counter(charSet) + Counter(s)
-            return max(c.values()) > 1
-            # prev = set()
-            # for c in s:
-            #     if c in charSet or c in prev:
-            #         return True
-            #     prev.add(c)
-            # return False
-
-        def backtrack(i):
+        seen = set()
+        def check(st):
+            _seen = set()
+            for c in st:
+                if c in seen or c in _seen:
+                    return True
+                _seen.add(c)
+            return False
+        def dp(i):
             if i == len(arr):
-                return len(charSet)
+                return len(seen)
             res = 0
-            if not overlap(charSet, arr[i]):
-                for c in arr[i]:
-                    charSet.add(c)
-                res = backtrack(i + 1)
-                for c in arr[i]:
-                    charSet.remove(c)
-            return max(res, backtrack(i + 1))  # dont concatenate arr[i]
-
-        return backtrack(0)  
+            if not check(arr[i]):
+                for ch in arr[i]:
+                    seen.add(ch)
+                res = dp(i+1)
+                for ch in arr[i]:
+                    seen.remove(ch)
+            return max(res,dp(i+1))
+        
+        return dp(0)
