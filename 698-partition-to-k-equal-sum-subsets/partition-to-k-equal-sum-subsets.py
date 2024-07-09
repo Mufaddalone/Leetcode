@@ -1,36 +1,25 @@
 class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
-        if sum(nums) % k != 0:
+        total_sum = sum(nums)
+        if total_sum % k != 0:
             return False
-
-        nums.sort(reverse = True)
-        target = sum(nums) / k
-        visited= set()
-
-        def backtrack(idx, count, currSum):
-            if count == k:
+        target_sum = total_sum // k
+        nums.sort(reverse=True)  # Sort in descending order for better pruning
+        used = [False] * len(nums)
+        
+        def backtrack(start, k, current_sum):
+            if k == 0:
                 return True
-
-            if target == currSum:
-                return backtrack(0, count + 1, 0)
-
-            for i in range(idx, len(nums)):
-                
-                # skip duplicates if last same number was skipped
-                if i > 0 and (i - 1) not in visited and nums[i] == nums[i - 1]:
-                    continue
-
-                if i in visited or currSum + nums[i] > target:
-                    continue
-
-                visited.add(i)
-
-                if backtrack(i + 1, count, currSum + nums[i]):
-                    return True
-                
-                visited.remove(i)
-
+            if current_sum == target_sum:
+                return backtrack(0, k - 1, 0)
+            for i in range(start, len(nums)):
+                if not used[i] and current_sum + nums[i] <= target_sum:
+                    used[i] = True
+                    if backtrack(i + 1, k, current_sum + nums[i]):
+                        return True
+                    used[i] = False
+                    if current_sum == 0:
+                        return False
             return False
-
-
-        return backtrack(0, 0, 0)
+        
+        return backtrack(0, k, 0)
