@@ -6,6 +6,23 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        q =  deque([root])
+        res = []
+        while q:
+            a = []
+            for i in range(len(q)):
+                node = q.popleft()
+                a.append(node.val)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            res.append(a)
+        return res
+                
+
         # res = []
         # def dfs(node,a):
         #     if not node: return 
@@ -35,29 +52,29 @@ class Solution:
         # return res
 
         
-        if not root:
-            return []
-        q = deque([root])
-        a = [[root.val]]
+        # if not root:
+        #     return []
+        # q = deque([root])
+        # a = [[root.val]]
 
-        while q:
-            b = []
-            for i in range(len(q)):
-                node = q.popleft()
-                if node.left and node.right:
-                    b.append(node.left.val)
-                    b.append(node.right.val)
-                    q.append(node.left)
-                    q.append(node.right)
-                elif node.left:
-                    b.append(node.left.val)
-                    q.append(node.left)
-                elif node.right:
-                    b.append(node.right.val)
-                    q.append(node.right)
-            a.append(b)
-        a.pop()
-        return a
+        # while q:
+        #     b = []
+        #     for i in range(len(q)):
+        #         node = q.popleft()
+        #         if node.left and node.right:
+        #             b.append(node.left.val)
+        #             b.append(node.right.val)
+        #             q.append(node.left)
+        #             q.append(node.right)
+        #         elif node.left:
+        #             b.append(node.left.val)
+        #             q.append(node.left)
+        #         elif node.right:
+        #             b.append(node.right.val)
+        #             q.append(node.right)
+        #     a.append(b)
+        # a.pop()
+        # return a
 
 
             
