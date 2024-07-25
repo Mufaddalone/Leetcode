@@ -14,6 +14,6 @@ class Solution:
             if node1.val != node2.val:
                 return False
             return dfs(node1.left,node2.right) and dfs(node1.right,node2.left)
-        return dfs(root.left,root.right) 
+        return dfs(root.left,root.right)
 
             
