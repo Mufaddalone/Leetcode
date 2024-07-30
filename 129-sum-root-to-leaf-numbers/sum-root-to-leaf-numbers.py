@@ -6,29 +6,14 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        res = []
-        def dfs(node, a):
-            if not node:
-                return
-            a.append(node.val)
-            if not node.left and not node.right:  # Check for leaf node
-                res.append(a[:])  # Store a copy of the current path
-            else:
-                if node.left:
-                    dfs(node.left, a[:])  # Pass a copy to the left
-                if node.right:
-                    dfs(node.right, a[:])  # Pass a copy to the right
+        def dfs(node,num):
+            if not node:return 0
+            num = num*10 + node.val
+            if not node.left and not node.right:
+                return num
+            return (dfs(node.left,num)+dfs(node.right,num))
+        return dfs(root,0)
 
-        dfs(root, [])
-        print(res)  # This will show the paths as lists of values
-        
-        # Calculate the sum of numbers formed by the paths
-        total_sum = 0
-        for path in res:
-            number = int(''.join(map(str, path)))
-            total_sum += number
-            
-        return total_sum
 
         # res= []
         # def dfs(node,a):
