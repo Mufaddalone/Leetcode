@@ -48,22 +48,45 @@ class Solution:
 
         m = len(grid)
         n = len(grid[0])
-        dp = [[-1 for i in range(len(grid[0]))]for j in range(len(grid))]
+        prev = [0] * n
         for i in range(m):
+            curr = [0]*n
             for j in range(n):
                 if i==0 and j==0:
-                    dp[i][j] = grid[i][j]
+                    curr[j] = grid[i][j]
                 else:
                     up = grid[i][j]
                     if i>0:
-                        up+= dp[i-1][j]
+                        up+= prev[j]
                     else:
                         up += int(1e9)
                     left = grid[i][j]
                     if j>0:
-                        left+= dp[i][j-1]
+                        left+= curr[j-1]
                     else:
                         left += int(1e9)
-                    dp[i][j] = min(left,up)
-        return dp[m-1][n-1]
+                    curr[j] = min(left,up)
+            prev = curr
+        return prev[n-1]
+
+        # m = len(grid)
+        # n = len(grid[0])
+        # dp = [[-1 for i in range(len(grid[0]))]for j in range(len(grid))]
+        # for i in range(m):
+        #     for j in range(n):
+        #         if i==0 and j==0:
+        #             dp[i][j] = grid[i][j]
+        #         else:
+        #             up = grid[i][j]
+        #             if i>0:
+        #                 up+= dp[i-1][j]
+        #             else:
+        #                 up += int(1e9)
+        #             left = grid[i][j]
+        #             if j>0:
+        #                 left+= dp[i][j-1]
+        #             else:
+        #                 left += int(1e9)
+        #             dp[i][j] = min(left,up)
+        # return dp[m-1][n-1]
                 
