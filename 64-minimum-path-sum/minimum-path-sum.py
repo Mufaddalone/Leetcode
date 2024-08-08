@@ -7,11 +7,15 @@ class Solution:
             for j in range(n):
                 if i == 0 and j == 0:
                     dp[i][j] = grid[i][j]
+                #if i=0 then all the elements will depend on the left element only
+                elif i == 0:
+                    dp[i][j] = dp[i][j-1] + grid[i][j]
+                #if j=0 then all the elements will depend on the top element only
+                elif j == 0:
+                    dp[i][j] = dp[i-1][j] + grid[i][j]
                 else:
-                    up = dp[i-1][j] if i > 0 else float('inf')
-                    left = dp[i][j-1] if j > 0 else float('inf')
-                    dp[i][j] = grid[i][j] + min(up, left)
-        
+                    dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+
         return dp[m-1][n-1]
 
         # m=len(grid)
