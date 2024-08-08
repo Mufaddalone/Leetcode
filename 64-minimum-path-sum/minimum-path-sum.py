@@ -1,22 +1,20 @@
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
-        m = len(grid)
-        n = len(grid[0])
-        dp = [[-1 for i in range(len(grid[0]))]for j in range(len(grid))]
+        m, n = len(grid), len(grid[0])
+        dp = [0] * n
+
         for i in range(m):
             for j in range(n):
                 if i == 0 and j == 0:
-                    dp[i][j] = grid[i][j]
-                #if i=0 then all the elements will depend on the left element only
+                    dp[j] = grid[i][j]
                 elif i == 0:
-                    dp[i][j] = dp[i][j-1] + grid[i][j]
-                #if j=0 then all the elements will depend on the top element only
+                    dp[j] = dp[j-1] + grid[i][j]
                 elif j == 0:
-                    dp[i][j] = dp[i-1][j] + grid[i][j]
+                    dp[j] = dp[j] + grid[i][j]
                 else:
-                    dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+                    dp[j] = min(dp[j], dp[j-1]) + grid[i][j]
 
-        return dp[m-1][n-1]
+        return dp[-1]
 
         # m=len(grid)
         # n=len(grid[0])
