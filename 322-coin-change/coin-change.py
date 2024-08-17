@@ -2,25 +2,28 @@ from typing import List
 
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [[-1 for j in range(amount + 1)] for i in range(len(coins))]
+        # dp = [[-1 for j in range(amount + 1)] for i in range(len(coins))]
+        prev = [0]*(amount+1)
+        curr = [0]*(amount+1)
 
         # Initialize the base case for the first row (only using the first coin)
         for i in range(amount + 1):
             if i % coins[0] == 0:
-                dp[0][i] = i // coins[0]
+                prev[i] = i // coins[0]
             else:
-                dp[0][i] = int(1e9)  # Use a large number to represent infinity
+                prev[i] = int(1e9)  # Use a large number to represent infinity
         
         # Fill the dp table
         for ind in range(1, len(coins)):
             for target in range(amount + 1):
-                notpick = dp[ind - 1][target]
+                notpick = prev[target]
                 take = int(1e9)  # Initialize to a large number
                 if coins[ind] <= target:
-                    take = 1 + dp[ind][target - coins[ind]]
-                dp[ind][target] = min(take, notpick)
+                    take = 1 + curr[target - coins[ind]]
+                curr[target] = min(take, notpick)
+            prev = curr
         
-        result = dp[len(coins) - 1][amount]
+        result = prev[amount]
         return result if result != int(1e9) else -1
 
 
