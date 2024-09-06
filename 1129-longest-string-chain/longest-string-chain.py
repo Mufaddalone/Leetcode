@@ -11,11 +11,17 @@ class Solution:
             if len(word2) - len(word1) != 1:
                 return False
             i = j = 0
-            while i < len(word1) and j < len(word2):
-                if word1[i] == word2[j]:
-                    i += 1
-                j += 1
-            return j == len(word1)
+            while i < len(word1):
+                if (word1[i] == word2[j] and j < len(word2)):
+                    i+=1
+                    j+=1
+                else:
+                    i+=1
+            return (i == len(word1) and j == len(word2))
+            #     if word1[i] == word2[j]:
+            #         i += 1
+            #     j += 1
+            # return i == len(word1)
         
         max_chain = 1
         for word in words:
