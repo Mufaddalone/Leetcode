@@ -15,7 +15,7 @@ class Solution:
                 if word1[i] == word2[j]:
                     i += 1
                 j += 1
-            return j == len(word1)+1
+            return j == len(word1)
         
         max_chain = 1
         for word in words:
