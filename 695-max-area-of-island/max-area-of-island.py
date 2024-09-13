@@ -17,7 +17,7 @@ class Solution:
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 size = dfs(r,c)
-                if (size>0 and size>maxsize):
+                if (size>maxsize):
                     maxsize= size
         return maxsize
      
