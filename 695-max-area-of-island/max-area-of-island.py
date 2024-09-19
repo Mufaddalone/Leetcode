@@ -16,8 +16,8 @@ class Solution:
         maxsize =0
         for r in range(n):
             for c in range(m):
-                size = dfs(r,c)
-                if (size>maxsize):
-                    maxsize = size
+                if grid[r][c] == 1 and (r, c) not in visited:  # Add this check
+                    size = dfs(r, c)
+                    maxsize = max(maxsize, size)
         return maxsize
                 
