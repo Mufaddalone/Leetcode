@@ -2,10 +2,12 @@ class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         adj = defaultdict(list)
         indegree = [0] * numCourses
-        for crs ,pre in prerequisites:
-            indegree[crs] +=1
-            adj[pre].append(crs)
 
+        for crs,pre in prerequisites:
+            indegree[pre]+=1
+            adj[crs].append(pre)
+
+        print(adj,indegree)
         q = deque()
         for i,c in enumerate(indegree):
             if not c:
@@ -15,9 +17,9 @@ class Solution:
             crs = q.popleft()
             for pre in adj[crs]:
                 indegree[pre] -= 1
-                if indegree[pre]==0:
+                if indegree[pre] ==0:
                     q.append(pre)
-        return True if sum(indegree)==0 else False
+        return True if sum(indegree) == 0 else False
         # adj = {i :[] for i in range(numCourses)}
 
         # for crs , pre in prerequisites:
