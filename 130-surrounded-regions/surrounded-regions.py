@@ -16,11 +16,7 @@ class Solution:
                 dfs(r,c+1)
                 dfs(r,c-1)
 
-        for i in range(n):
-            if (0, i) not in visited and board[0][i] == "O":
-                dfs(0, i)
-            if (m - 1, i) not in visited and board[m - 1][i] == "O":
-                dfs(m - 1, i)
+        
 
         # Traverse the first and last columns
         for i in range(m):
@@ -28,6 +24,12 @@ class Solution:
                 dfs(i, 0)
             if (i, n - 1) not in visited and board[i][n - 1] == "O":
                 dfs(i, n - 1)
+
+        for j in range(n):
+            if (0, j) not in visited and board[0][j] == "O":
+                dfs(0, j)
+            if (m - 1, j) not in visited and board[m - 1][j] == "O":
+                dfs(m - 1, j)
         
         for i in range(m):
             for j in range(n):
