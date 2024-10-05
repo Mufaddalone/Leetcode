@@ -15,9 +15,6 @@ class Solution:
                 dfs(r-1,c)
                 dfs(r,c+1)
                 dfs(r,c-1)
-
-        
-
         # Traverse the first and last columns
         for i in range(m):
             if (i, 0) not in visited and board[i][0] == "O":
