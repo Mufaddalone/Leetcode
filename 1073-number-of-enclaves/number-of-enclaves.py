@@ -3,7 +3,6 @@ class Solution:
         visited = set()
         m = len(grid)
         n = len(grid[0])
-        land = [[0 for j in range(n)]for i in range(m)]
         def dfs(r,c):
             if r<0 or c<0 or r>=m or c>=n or (r,c) in visited:
                 return
