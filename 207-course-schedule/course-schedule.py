@@ -1,25 +1,37 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         adj = defaultdict(list)
-        indegree = [0] * numCourses
-
+        # indegree = [0] * numCourses
         for crs,pre in prerequisites:
-            indegree[pre]+=1
             adj[crs].append(pre)
-
-        print(adj,indegree)
         q = deque()
-        for i,c in enumerate(indegree):
-            if not c:
+        indegree= [0]*numCourses
+        for i in adj:
+            for j in adj[i]:
+                indegree[j] +=1
+        for i in range(numCourses):
+            if indegree[i] == 0:
                 q.append(i)
-        
+        topo = []
         while q:
-            crs = q.popleft()
-            for pre in adj[crs]:
-                indegree[pre] -= 1
-                if indegree[pre] ==0:
-                    q.append(pre)
-        return True if sum(indegree) == 0 else False
+            node = q.popleft()
+            topo.append(node)
+            for i in adj[node]:
+                indegree[i] -=1
+                if indegree[i] == 0:
+                    q.append(i)
+        return len(topo)== numCourses
+        # q = deque()
+        # for i,c in enumerate(indegree):
+        #     if not c:
+        #         q.append(i)
+        # while q:
+        #     crs = q.popleft()
+        #     for pre in adj[crs]:
+        #         indegree[pre] -= 1
+        #         if indegree[pre] ==0:
+        #             q.append(pre)
+        # return True if sum(indegree) == 0 else False
         # adj = {i :[] for i in range(numCourses)}
 
         # for crs , pre in prerequisites:
