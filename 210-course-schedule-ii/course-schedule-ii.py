@@ -3,7 +3,7 @@ class Solution:
         adj = defaultdict(list)
         # indegree = [0] * numCourses
         for crs,pre in prerequisites:
-            adj[crs].append(pre)
+            adj[pre].append(crs)
         q = deque()
         indegree= [0]*numCourses
         for i in adj:
@@ -21,7 +21,7 @@ class Solution:
                 if indegree[i] == 0:
                     q.append(i)
         if len(topo)==numCourses:
-            return topo[::-1] 
+            return topo
         else:
             return []
                 
