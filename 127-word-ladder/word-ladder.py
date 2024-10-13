@@ -1,37 +1,21 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        # Create a set of all words in the word list for quick lookup.
-        wordSet = set(wordList)
-
-        # If endWord is not in the word list, return 0.
-        if endWord not in wordSet:
-            return 0
-
-        # Use a queue to perform BFS (Breadth-First Search).
-        wordQueue = deque([beginWord])
-
-        # Distance from the beginWord (initially 1).
-        distance = 1
-
-        while wordQueue:
-            size = len(wordQueue)
-            distance += 1  # Increase distance at each level of BFS
-
-            for _ in range(size):
-                currWord = wordQueue.popleft()
-
-                # Try changing each character of the current word
-                for i in range(len(currWord)):
-                    for j in range(26):  # Try all lowercase letters
-                        temp = currWord[:i] + chr(ord('a') + j) + currWord[i+1:]
-
-                        # If the new word matches the endWord, return the distance
-                        if temp == endWord:
-                            return distance
-
-                        # If the new word is in the set, add it to the queue and remove it from the set
-                        if temp in wordSet:
-                            wordQueue.append(temp)
-                            wordSet.remove(temp)
-
-        return 0  # Return 0 if no transformation sequence is found
+        wordset = set(wordList)
+        q = deque()
+        q.append((beginWord,1))
+        # wordset.remove(beginWord)
+        while q:
+            word,dist = q.popleft()
+            if word == endWord: return dist
+            for i in range(len(word)):
+                original = word[i]
+                word_list = list(word)
+                for j in range(26):
+                    word_list[i] = chr(ord('a') + j)
+                    new_word = ''.join(word_list)
+                    if new_word in wordset:
+                        wordset.remove(new_word)
+                        q.append((new_word, dist+1))    
+                word_list[i] = original
+        return 0
+                    
