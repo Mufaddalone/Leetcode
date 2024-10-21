@@ -5,27 +5,29 @@ class Solution:
             adj[u].append((v,w))
             adj[v].append((u,w))
 
-        def dijkstra(start):
+        def dj(src):
             dist = [float("inf")]*n
-            dist[start] = 0
-            q = [(0,start)]
+            dist[src] = 0
+            q = []
+            heapq.heappush(q,(0,src))
             while q:
-                d,node = heappop(q)
-                if d>dist[node]:
-                    continue 
-                for neighbour,weight in adj[node]:
-                    if d+weight<dist[neighbour]:
-                        dist[neighbour] =  d+weight
-                        heappush(q,(d+weight,neighbour) )   
-            return sum(1 for i in range(n) if dist[i] <= distanceThreshold)
+                dis , node = heapq.heappop(q)
+                for adjnode, weight in adj[node]:
+                    if dis + weight < dist[adjnode]:
+                        dist[adjnode] = dis + weight
+                        heapq.heappush(q,(dist[adjnode],adjnode))
+            a = 0
+            for i in range(n):
+                if dist[i] <= distanceThreshold:
+                    a+=1
+            return a
+        cityno = -1
+        cntcity = n
+        for i in range(n):
+            cnt = dj(i)
+            if cnt <= cntcity:
+                cntcity = cnt
+                cityno = i
+        return cityno
+                
 
-        min_neighbors = n
-        result_city = -1
-    
-        for city in range(n):
-            reachable = dijkstra(city)
-            if reachable < min_neighbors or (reachable == min_neighbors and city > result_city):
-                min_neighbors = reachable
-                result_city = city
-        
-        return result_city 
