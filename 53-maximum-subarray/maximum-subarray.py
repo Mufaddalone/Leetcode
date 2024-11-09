@@ -5,8 +5,7 @@ class Solution:
 
         for i in nums:
             sum += i
-            if sum > maxi:
-                maxi = sum
+            maxi = max(sum,maxi)
             if sum < 0:
                 sum = 0
         return maxi
