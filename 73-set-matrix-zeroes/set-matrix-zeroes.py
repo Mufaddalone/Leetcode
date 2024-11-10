@@ -5,18 +5,33 @@ class Solution:
         """
         n = len(matrix[0])
         m = len(matrix)
-        visit = [row[:] for row in matrix]
-        def zero(r,c):
-            if visit[r][c] !=0:
-                return 
-            for i in range(m):
-                matrix[i][c] = 0
+        row = [0]*m
+        col = [0]*n
+        for i in range(m):
             for j in range(n):
-                matrix[r][j] = 0
-        for r in range(m):
-            for c in range(n):
-                if matrix[r][c] == 0:
-                    zero(r,c)
+                if matrix[i][j] ==0:
+                    row[i] = 1
+                    col [j] = 1
+        for i in range(m):
+            for j in range(n):
+                if row[i] ==1 or col[j] ==1:
+                    matrix[i][j] =0
+                
+
+        # n = len(matrix[0])
+        # m = len(matrix)
+        # visit = [row[:] for row in matrix]
+        # def zero(r,c):
+        #     if visit[r][c] !=0:
+        #         return 
+        #     for i in range(m):
+        #         matrix[i][c] = 0
+        #     for j in range(n):
+        #         matrix[r][j] = 0
+        # for r in range(m):
+        #     for c in range(n):
+        #         if matrix[r][c] == 0:
+        #             zero(r,c)
         # n = len(matrix[0])
         # m = len(matrix)
         # dri = [[0,1],[1,0],[-1,0],[0,-1]]
