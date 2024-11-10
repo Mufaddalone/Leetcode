@@ -3,19 +3,33 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        n = len(matrix[0])
-        m = len(matrix)
-        row = [0]*m
-        col = [0]*n
+        m,n = len(matrix), len(matrix[0])
+        a = set()
+        b = set()
         for i in range(m):
             for j in range(n):
-                if matrix[i][j] ==0:
-                    row[i] = 1
-                    col [j] = 1
-        for i in range(m):
-            for j in range(n):
-                if row[i] ==1 or col[j] ==1:
-                    matrix[i][j] =0
+                if(matrix[i][j]==0):
+                    a.add(i)
+                    b.add(j)
+        
+        for i in a:
+            matrix[i] = [0]*n
+        
+        for j in b:
+            for i in range(m): matrix[i][j]=0
+        # n = len(matrix[0])
+        # m = len(matrix)
+        # row = [0]*m
+        # col = [0]*n
+        # for i in range(m):
+        #     for j in range(n):
+        #         if matrix[i][j] ==0:
+        #             row[i] = 1
+        #             col [j] = 1
+        # for i in range(m):
+        #     for j in range(n):
+        #         if row[i] ==1 or col[j] ==1:
+        #             matrix[i][j] =0
                 
 
         # n = len(matrix[0])
