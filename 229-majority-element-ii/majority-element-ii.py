@@ -8,7 +8,6 @@ class Solution:
                 continue
             new_count = defaultdict(int)
             for i,c in count.items():
-                count[i]-=1
                 if c >1:
                     new_count[i] = c-1
             count = new_count
