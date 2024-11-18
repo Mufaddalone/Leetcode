@@ -1,7 +1,7 @@
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
         pre, suf =1,1
-        maxi = float("-inf")
+        maxi = nums[0]
         for i in range(len(nums)):
             if pre == 0:
                 pre =1
