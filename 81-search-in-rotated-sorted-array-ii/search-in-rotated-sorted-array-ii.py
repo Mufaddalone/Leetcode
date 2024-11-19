@@ -1,37 +1,26 @@
 class Solution:
-    def search(self, arr: List[int], k: int) -> bool:
-        n = len(arr)  # size of the array
-        low, high = 0, n - 1
-
-        while low <= high:
-            mid = (low + high) // 2
-
-            # if mid points to the target
-            if arr[mid] == k:
+    def search(self, nums: List[int], target: int) -> bool:
+        l,r = 0,len(nums)-1
+        while l<=r:
+            mid = (l+r)//2
+            if nums[mid] == target:
                 return True
-
-            # Edge case:
-            if arr[low] == arr[mid] and arr[mid] == arr[high]:
-                low += 1
-                high -= 1
+            
+            if nums[l] == nums[mid] and nums[mid] == nums[r]:
+                l += 1
+                r -= 1
                 continue
-
-            # if left part is sorted
-            if arr[low] <= arr[mid]:
-                if arr[low] <= k <= arr[mid]:
-                    # element exists
-                    high = mid - 1
+            
+            if nums[l] <= nums[mid]:
+                if nums[l]<=target <= nums[mid]:
+                    r = mid-1
                 else:
-                    # element does not exist
-                    low = mid + 1
-            else:  # if right part is sorted
-                if arr[mid] <= k <= arr[high]:
-                    # element exists
-                    low = mid + 1
+                    l = mid+1
+            else:
+                if nums[mid]<= target <= nums[r]:
+                    l = mid+1
                 else:
-                    # element does not exist
-                    high = mid - 1
-
+                    r = mid-1
         return False
             
             
