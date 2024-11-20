@@ -15,6 +15,4 @@ class Solution:
             if nums[mid+1]>nums[mid]:
                 l=mid+1
             else:
-                r=mid-1
-        return False
-            
+                r=mid-1            
