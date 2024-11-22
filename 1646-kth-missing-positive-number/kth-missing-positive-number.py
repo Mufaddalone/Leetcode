@@ -4,9 +4,8 @@ class Solution:
         # while l<=r:
         #     mid = (l+r)//2
         res = []
-        z = set(arr)
         for i in range(max(arr)+k+1):
-            if i not in z:
+            if i not in arr:
                 res.append(i)
         return res[k]
 
