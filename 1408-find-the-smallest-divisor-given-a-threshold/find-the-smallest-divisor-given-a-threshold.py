@@ -7,9 +7,8 @@ class Solution:
                 divident += math.ceil(i/mid)
             return divident
         while l<=r:
-            mid = (l+r)//2
-            divide = divisor(mid)
-            if divide > threshold:
+            mid = (l+r)//2 
+            if divisor(mid) > threshold:
                 l = mid+1
             else:
                 r = mid-1
