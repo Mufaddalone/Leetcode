@@ -34,8 +34,13 @@ class Solution:
             if temp == head:
                 head = kthnode
             else:
-                prevNode.next = kthnode
+                prevNode.next=kthnode
             prevNode = temp
             temp = nextNode
         return head
+
+            
+
+            
+
 
