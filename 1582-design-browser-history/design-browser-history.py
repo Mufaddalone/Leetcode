@@ -1,7 +1,7 @@
 class Node:
     def __init__(self,val):
         self.val = val
-        self.prev=self.next = None
+        self.prev = self.next = None
 
 class BrowserHistory:
 
@@ -14,19 +14,18 @@ class BrowserHistory:
         self.curr.next.prev = self.curr
         self.curr = self.curr.next
 
-
     def back(self, steps: int) -> str:
         while self.curr.prev and steps:
             self.curr = self.curr.prev
             steps-=1
         return self.curr.val
-        
 
     def forward(self, steps: int) -> str:
         while self.curr.next and steps:
             self.curr = self.curr.next
             steps-=1
         return self.curr.val
+        
 
 
 # Your BrowserHistory object will be instantiated and called as such:
