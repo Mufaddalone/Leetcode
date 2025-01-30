@@ -1,15 +1,14 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        l,r = 0 , len(height)-1
-        res = 0
-        lefth, righth = height[l],height[r]
-        while l<r:
-            if lefth<righth:
-                l+=1
-                lefth = max(lefth,height[l])
-                res += lefth - height[l]
-            else:
-                r-=1
-                righth = max(righth,height[r])
-                res+= righth-height[r]
-        return res
+        prefix = [height[0]]
+        for i in range(1,len(height)):
+            prefix.append(max(prefix[i-1],height[i]))
+        sufix = [0]*len(height)
+        sufix[-1] = height[-1]
+        for i in range(len(height)-2,-1,-1):
+            sufix[i] = max(sufix[i+1],height[i])
+        total = 0
+        for i in range(len(height)):
+            if height[i] <= prefix[i] and height[i] <= sufix[i]:
+                total += min(prefix[i],sufix[i]) - height[i]
+        return total
