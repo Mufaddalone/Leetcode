@@ -10,9 +10,6 @@ class Solution:
             stack.pop()
             k-=1
         if not stack: return "0"
-        res = ""
-        while stack:
-            res+=stack.pop()
-        res = res[::-1].lstrip("0")
+        res = ''.join(stack).lstrip('0')
         return res if res else "0"
 
