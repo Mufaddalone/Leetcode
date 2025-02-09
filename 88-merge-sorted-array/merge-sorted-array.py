@@ -3,18 +3,18 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        last = m+n-1
-        while m>0 and n>0:
-            if nums1[m-1]>=nums2[n-1]:
-                nums1[last] = nums1[m-1]
-                last -=1
-                m-=1
+        l,r=m-1,n-1
+        for i in range(len(nums1)-1,-1,-1):
+            if l < 0:
+                nums1[:i+1] = nums2[:r+1]
+                break
+            if r<0:
+                break
+            if nums1[l]>nums2[r]:
+                nums1[i] = nums1[l]
+                l-=1
             else:
-                nums1[last] = nums2[n-1]
-                last -=1
-                n-=1
-        while n>0:
-            nums1[last] = nums2[n-1]
-            n-=1
-            last-=1
-
+                nums1[i] = nums2[r]
+                r-=1
+        return nums1
+            
