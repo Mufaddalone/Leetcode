@@ -3,7 +3,7 @@ class Solution:
         l = 0
         maxlen = 0
         count = 0
-        z = ("a","e","i","o","u")
+        z = {"a", "e", "i", "o", "u"}
         for r in range(len(s)):
             if r-l+1>k:
                 if s[l] in z:
