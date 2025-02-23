@@ -5,9 +5,9 @@ class Solution:
             if asteroids[i]>0:
                 stack.append(asteroids[i])
             else:
-                while stack and stack[-1]>0 and abs(asteroids[i]) > stack[-1]:
+                while stack and stack[-1] >0 and abs(asteroids[i])-stack[-1]>0:
                     stack.pop()
-                if stack and stack[-1]== abs(asteroids[i]):
+                if stack and stack[-1] == abs(asteroids[i]):
                     stack.pop()
                 elif not stack or stack[-1] < 0:
                     stack.append(asteroids[i])
