@@ -9,7 +9,6 @@ class Solution:
         while k:
             stack.pop()
             k-=1
-        if not stack: return "0"
         res = ''.join(stack).lstrip('0')
         return res if res else "0"
 
