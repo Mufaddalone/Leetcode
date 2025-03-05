@@ -8,11 +8,10 @@ class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         def dfs(node,left,right):
             if not node:return True
-            if not (node.val>left and node.val<right):
+            if node.val<=left or node.val>=right:
                 return False
-            return (dfs(node.left,left,node.val)and dfs(node.right,node.val,right))
-        return (dfs(root,float("-inf"),float("inf")))
-
+            return (dfs(node.left,left,node.val) and dfs(node.right,node.val,right))
+        return dfs(root,float("-inf"),float("inf"))
         # if not root:
         #     return True
         # q = deque([root])
@@ -33,6 +32,3 @@ class Solution:
         #             q.append(node.left)
         #             q.append(node.right)
         # return True
-
-        
-        
