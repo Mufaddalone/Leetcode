@@ -6,24 +6,24 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        a = headA
-        b = headB
-        while a!= b:
-            if not a:
-                a = headB
-            else:
-                a = a.next
-            if not b:
-                b = headA
-            else:
-                b = b.next
-        return a
-        # z = set()
-        # while headA:
-        #     z.add(headA)
-        #     headA = headA.next
-        # while headB:
-        #     if headB in z:
-        #         return headB
-        #     headB = headB.next
-        # return None
+        # a = headA
+        # b = headB
+        # while a!= b:
+        #     if not a:
+        #         a = headB
+        #     else:
+        #         a = a.next
+        #     if not b:
+        #         b = headA
+        #     else:
+        #         b = b.next
+        # return a
+        z = set()
+        while headA:
+            z.add(headA)
+            headA = headA.next
+        while headB:
+            if headB in z:
+                return headB
+            headB = headB.next
+        return None
