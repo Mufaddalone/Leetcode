@@ -1,19 +1,11 @@
 class Solution:
     def validPalindrome(self, s: str) -> bool:
-        def pal(l,r):
-            while l<r:
-                if s[l]!=s[r]:
-                    return False
-                else:
-                    l+=1
-                    r-=1
-            return True
-        l,r=0,len(s)-1
+        l,r =0,len(s)-1
         while l<r:
             if s[l]!=s[r]:
-                return pal(l+1,r) or pal(l,r-1)
-            else:
-                l+=1
-                r-=1
+                skipleft, skipright = s[l+1:r+1],s[l:r]
+                return skipleft==skipleft[::-1] or skipright==skipright[::-1]
+            l+=1
+            r-=1
         return True
-    
+
