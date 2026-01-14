@@ -4,11 +4,6 @@ class Solution:
         for i in range(len(nums)):
             diff = target - nums[i]
             if diff in a:
-                return [a[diff],i]
+                return [i,a[diff]]
             a[nums[i]] = i
-
-
-
-
-
             
