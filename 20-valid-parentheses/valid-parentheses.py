@@ -1,19 +1,15 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        closing = {"]":"[","}":"{",")":"("}
-        stack = []
+        closing = {"}":"{","]":"[",")":"("}
+        a = []
         for i in s:
-            if i in closing:
-                if stack and stack[-1] == closing[i]:
-                    stack.pop()
+            if i in closing and len(a)!=0:
+                if a[-1] == closing[i]:
+                    a.pop()
                 else:
                     return False
+            elif i in closing:
+                return False
             else:
-                stack.append(i)
-        return True if not stack else False
-
-
-
-
-                
-            
+                a.append(i)
+        return len(a)==0
